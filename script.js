@@ -126,7 +126,7 @@ class Scene4 extends Phaser.Scene {
         this.load.image('monke2', './assets/m2.jpg');
     }
     create(){
-        this.add.text(10, 400, "Congratulations! You finished the second level! Here's another monkey!").setFontSize(30);
+        this.add.text(10, 400, "Congratulations! You finished the second level! Here's another monkey! Only one more!").setFontSize(30);
         this.add.text(100, 300, "Click to continue").setFontSize(20);
         this.input.on('pointerdown', () => this.scene.start('Scene5'));
         let sprite = this.add.image(910,-10,'monke2')
