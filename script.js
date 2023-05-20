@@ -95,7 +95,11 @@ class Scene5 extends Phaser.Scene {
         this.wall = this.physics.add.sprite(1000, game.config.width/2-5, 'wall').setScale(0.1);
         this.physics.add.collider(this.ball, this.ground);
         this.physics.add.collider(this.wall, this.ground);
-
+        this.input.keyboard.on('keydown', (event) => {
+            if(event.key == 'f'){
+                    this.scene.start('Scene2')
+            }
+        })
     }
     update(){
         if(this.ball.body.position.x >= this.wall.body.position.x){
@@ -154,7 +158,7 @@ class Scene3 extends Phaser.Scene {
         this.JUMP_VELOCITY = -700;
         this.MAX_JUMPS = 2;
         this.SCROLL_SPEED = 4;
-        this.physics.world.gravity.y = 2600;
+        this.physics.world.gravity.y = 3000;
 
         // set bg color
         this.cameras.main.setBackgroundColor('#FFFFFF');
@@ -187,7 +191,11 @@ class Scene3 extends Phaser.Scene {
 
         this.physics.add.collider(this.ball, this.ground);
         this.physics.add.collider(this.wall, this.ground);
-
+        this.input.keyboard.on('keydown', (event) => {
+            if(event.key == 'f'){
+                    this.scene.start('Scene2')
+            }
+        })
 
     }
     update(){
@@ -241,12 +249,11 @@ class Scene1 extends Phaser.Scene {
 
     }
     create(){
-        this.ACCELERATION = 500;
-        this.MAX_X_VEL = 500;   // pixels/second
+        this.ACCELERATION = 400;
+        this.MAX_X_VEL = 400;   
         this.MAX_Y_VEL = 5000;
-        this.DRAG = 600;    // DRAG < ACCELERATION = icy slide
         this.JUMP_VELOCITY = -1000;
-        this.physics.world.gravity.y = 3000;
+        this.physics.world.gravity.y = 1000;
 
         // set bg color
         this.cameras.main.setBackgroundColor('#FFFFFF');
@@ -271,6 +278,12 @@ class Scene1 extends Phaser.Scene {
             this.ground.add(groundTile);
         }
         for(let i = 5*2; i < game.config.width-5*13; i += 5) {
+            let groundTile = this.physics.add.sprite(i, game.config.height - 5*9, 'tile').setScale(10).setOrigin(0);
+            groundTile.body.immovable = true;
+            groundTile.body.allowGravity = false;
+            this.ground.add(groundTile);
+        }
+        for(let i = 5*9; i < game.config.width-5*33; i += 5) {
             let groundTile = this.physics.add.sprite(i, game.config.height - 5*9, 'tile').setScale(10).setOrigin(0);
             groundTile.body.immovable = true;
             groundTile.body.allowGravity = false;
@@ -309,7 +322,6 @@ class Scene1 extends Phaser.Scene {
             this.ball.body.setDragX(this.DRAG);        
         }
         this.physics.world.wrap(this.ball, this.ball.width/2);
-
     }
 }
 
